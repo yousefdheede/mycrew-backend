@@ -1,0 +1,33 @@
+{
+    "cSpell.words": [
+        "autoflush",
+        "danahassoun",
+        "Dheede",
+        "fastapi",
+        "Hassoun",
+        "mycrew",
+        "phonenumber",
+        "pydantic",
+        "sessionmaker",
+        "sqlalchemy",
+        "Yousef",
+        "yousefdheede"
+    ],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "sqconn",
+            "database": "${workspaceFolder:fastapi-server}/mycrew_app.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
+    "gitConfigUser.profiles": [
+        {
+            "label": "yousefdheede",
+            "email": "dheede.2000@gmail.com",
+            "userName": "yousefdheede",
+            "selected": false
+        }
+    ]
+}
