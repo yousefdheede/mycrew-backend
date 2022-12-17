@@ -1,0 +1,27 @@
+-- Create table for job postings
+CREATE TABLE jobs (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    company TEXT,
+    location TEXT,
+    tags TEXT
+);
+
+-- Create table for job applicants
+CREATE TABLE applicants (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    email TEXT,
+    phone TEXT,
+    resume TEXT
+);
+
+-- Create table for job applications
+CREATE TABLE applications (
+    id INTEGER PRIMARY KEY,
+    job_id INTEGER,
+    applicant_id INTEGER,
+    status TEXT,
+    FOREIGN KEY(job_id) REFERENCES jobs(id),
+    FOREIGN KEY(applicant_id) REFERENCES applicants(id)
+);

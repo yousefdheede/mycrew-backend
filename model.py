@@ -1,5 +1,3 @@
-
-
 from enum import Enum, unique
 from typing import List, Optional
 from uuid import UUID, uuid4
@@ -14,8 +12,7 @@ class Role(str,Enum) :
      client="client"
      company="company"
      
-class specification(str,Enum): 
-    specification_title="CE"     
+    
      
 class Job(BaseModel):
     job_id:Optional[UUID]= uuid4() 
@@ -24,10 +21,15 @@ class Job(BaseModel):
     job_email: str
     job_password: str 
     job_location: float
-    job_specification: List[specification]
-    job_phone=int
+    job_phone: int
 
-
+class Job_update(BaseModel):
+    job_title: Optional[str] 
+    job_description: Optional[str]  
+    job_email: Optional[str] 
+    job_password: Optional[str]  
+    job_location: Optional[float] 
+    job_phone: Optional[str] 
    
 class User(BaseModel): 
     id: Optional[UUID] = uuid4()
