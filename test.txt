@@ -31,3 +31,48 @@ async def search_jobs(
         # Add logic for filtering by tags
         pass
     return results
+#########################
+###########################
+import fastapi
+from fastapi import FastAPI, Query, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class Job(BaseModel):
+    title: str
+    company: str
+    location: str
+    description: str
+    salary: float
+
+@app.get("/jobs")
+def search_jobs(
+    q: str = Query(None, min_length=2, max_length=50, regex=r"^[a-zA-Z0-9 ]*$"),
+    location: str = Query(None, min_length=2, max_length=50, regex=r"^[a-zA-Z0-9 ]*$"),
+    salary: float = Query(None, gt=0)
+):
+    jobs = []
+    # Query database or external API to search for jobs based on provided parameters
+    if q:
+        jobs = filter(lambda j: q in j.title or q in j.description, jobs)
+    if location:
+        jobs = filter(lambda j: location in j.location, jobs)
+    if salary:
+        jobs = filter(lambda j: salary <= j.salary, jobs)
+    return jobs
+
+@app.post("/jobs")
+def create_job(job: Job):
+    # Save job to database or external API
+    return job
+
+@app.put("/jobs/{id}")
+def update_job(id: int, job: Job):
+    # Update job in database or external API
+    return job
+
+@app.delete("/jobs/{id}")
+def delete_job(id: int):
+    # Delete job from database or external API
+    return {"message": "Successfully deleted job"}

@@ -1,6 +1,6 @@
 from typing import List
 from uuid import UUID, uuid4
-from fastapi import FastAPI, HTTPException , Form ,Body
+from fastapi import FastAPI, HTTPException , Form ,Body, Query
 from model import Gender, Job, Job_update, Role, User, user_update 
 
 jobapp= FastAPI()
@@ -55,7 +55,27 @@ async def update_job(Job_update:Job_update,job_title:str):
 async def add_job(job:Job):
       db.append(job);
       return
- 
+
+
+@jobapp.get("/api/mycrew/jobs") # search for the job 
+async def search_jobs(
+    title: str = Query(None, min_length=3, max_length=100),
+    company: str = Query(None, min_length=3, max_length=100),
+    location: str = Query(None, min_length=3, max_length=100),
+    tags: List[str] = Query(None)
+):
+    results = Job
+    if title:
+        results = [job for job in results if title.lower() in job["title"].lower()]
+    if company:
+        results = [job for job in results if company.lower() in job["company"].lower()]
+    if location:
+        # Add logic for filtering by location
+        pass
+    if tags:
+        # Add logic for filtering by tags
+        pass
+    return results 
 
 
 

@@ -1,6 +1,6 @@
 from typing import List
 from uuid import UUID, uuid4
-from fastapi import FastAPI, HTTPException , Form ,Body
+from fastapi import FastAPI, HTTPException , Form ,Body, Query
 from model import Gender, Job, Role, User, user_update 
 
 app= FastAPI() 
@@ -45,7 +45,7 @@ async def search_user(username: str):
         if user.username==username: 
             return user 
 
- 
+
 
 @app.post("/api/mycrew/register") # add new yser
 async def register_user(user: User):
